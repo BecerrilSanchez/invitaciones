@@ -8,8 +8,23 @@ export const createTodo = /* GraphQL */ `
   ) {
     createTodo(input: $input, condition: $condition) {
       id
-      name
-      description
+      IDnovios
+      nombreInvitado1
+      nombreInvitado2
+      nombreInvitado3
+      nombreInvitado4
+      nombreInvitado5
+      nombreInvitado6
+      nombreInvitado7
+      nombreInvitado8
+      nombreInvitado9
+      nombreInvitado10
+      nombreInvitado11
+      nombreInvitado12
+      ofertaDeInvitaciones
+      nInvitacionesAceptadas
+      invitacionFamiliar
+      apellidosFamilia
       createdAt
       updatedAt
       __typename
@@ -23,8 +38,23 @@ export const updateTodo = /* GraphQL */ `
   ) {
     updateTodo(input: $input, condition: $condition) {
       id
-      name
-      description
+      IDnovios
+      nombreInvitado1
+      nombreInvitado2
+      nombreInvitado3
+      nombreInvitado4
+      nombreInvitado5
+      nombreInvitado6
+      nombreInvitado7
+      nombreInvitado8
+      nombreInvitado9
+      nombreInvitado10
+      nombreInvitado11
+      nombreInvitado12
+      ofertaDeInvitaciones
+      nInvitacionesAceptadas
+      invitacionFamiliar
+      apellidosFamilia
       createdAt
       updatedAt
       __typename
@@ -38,8 +68,23 @@ export const deleteTodo = /* GraphQL */ `
   ) {
     deleteTodo(input: $input, condition: $condition) {
       id
-      name
-      description
+      IDnovios
+      nombreInvitado1
+      nombreInvitado2
+      nombreInvitado3
+      nombreInvitado4
+      nombreInvitado5
+      nombreInvitado6
+      nombreInvitado7
+      nombreInvitado8
+      nombreInvitado9
+      nombreInvitado10
+      nombreInvitado11
+      nombreInvitado12
+      ofertaDeInvitaciones
+      nInvitacionesAceptadas
+      invitacionFamiliar
+      apellidosFamilia
       createdAt
       updatedAt
       __typename

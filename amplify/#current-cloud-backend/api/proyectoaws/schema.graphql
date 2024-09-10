@@ -1,9 +1,25 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
-
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
 type Todo @model {
   id: ID!
-  name: String!
-  description: String
+  IDnovios: String!
+  nombreInvitado1: String
+  nombreInvitado2: String
+  nombreInvitado3: String
+  nombreInvitado4: String
+  nombreInvitado5: String
+  nombreInvitado6: String
+  nombreInvitado7: String
+  nombreInvitado8: String
+  nombreInvitado9: String
+  nombreInvitado10: String
+  nombreInvitado11: String # Corregí aquí, ya que había un error tipográfico ("Strin" -> "String")
+  nombreInvitado12: String
+  ofertaDeInvitaciones: Int
+  nInvitacionesAceptadas: Int
+  invitacionFamiliar: Boolean!
+  apellidosFamilia: String
 }

@@ -35,8 +35,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-proyectoaws-dev-87a84-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiproyectoaws"
       },
-      "lastPushTimeStamp": "2024-09-04T05:13:15.144Z",
-      "lastPushDirHash": "5suMbSbHt/ERXfqFyDhprVL2js4="
+      "lastPushTimeStamp": "2024-09-10T22:39:22.387Z",
+      "lastPushDirHash": "UtNCYCIJbLR+1/QRed8RoYlpi+0="
     }
   },
   "hosting": {
@@ -48,7 +48,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-proyectoaws-dev-87a84-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
       },
-      "lastPushTimeStamp": "2024-09-04T05:13:15.156Z",
+      "lastPushTimeStamp": "2024-09-10T22:39:20.348Z",
       "output": {},
       "lastPushDirHash": "/RaW9SVMoTzmziIXLbCSnhEpCgk="
     }

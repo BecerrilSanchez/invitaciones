@@ -1,7 +1,22 @@
 type Todo {
   id: ID!
-  name: String!
-  description: String
+  IDnovios: String!
+  nombreInvitado1: String
+  nombreInvitado2: String
+  nombreInvitado3: String
+  nombreInvitado4: String
+  nombreInvitado5: String
+  nombreInvitado6: String
+  nombreInvitado7: String
+  nombreInvitado8: String
+  nombreInvitado9: String
+  nombreInvitado10: String
+  nombreInvitado11: String
+  nombreInvitado12: String
+  ofertaDeInvitaciones: Int
+  nInvitacionesAceptadas: Int
+  invitacionFamiliar: Boolean!
+  apellidosFamilia: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -163,8 +178,23 @@ type ModelTodoConnection {
 
 input ModelTodoFilterInput {
   id: ModelIDInput
-  name: ModelStringInput
-  description: ModelStringInput
+  IDnovios: ModelStringInput
+  nombreInvitado1: ModelStringInput
+  nombreInvitado2: ModelStringInput
+  nombreInvitado3: ModelStringInput
+  nombreInvitado4: ModelStringInput
+  nombreInvitado5: ModelStringInput
+  nombreInvitado6: ModelStringInput
+  nombreInvitado7: ModelStringInput
+  nombreInvitado8: ModelStringInput
+  nombreInvitado9: ModelStringInput
+  nombreInvitado10: ModelStringInput
+  nombreInvitado11: ModelStringInput
+  nombreInvitado12: ModelStringInput
+  ofertaDeInvitaciones: ModelIntInput
+  nInvitacionesAceptadas: ModelIntInput
+  invitacionFamiliar: ModelBooleanInput
+  apellidosFamilia: ModelStringInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
   and: [ModelTodoFilterInput]
@@ -178,8 +208,23 @@ type Query {
 }
 
 input ModelTodoConditionInput {
-  name: ModelStringInput
-  description: ModelStringInput
+  IDnovios: ModelStringInput
+  nombreInvitado1: ModelStringInput
+  nombreInvitado2: ModelStringInput
+  nombreInvitado3: ModelStringInput
+  nombreInvitado4: ModelStringInput
+  nombreInvitado5: ModelStringInput
+  nombreInvitado6: ModelStringInput
+  nombreInvitado7: ModelStringInput
+  nombreInvitado8: ModelStringInput
+  nombreInvitado9: ModelStringInput
+  nombreInvitado10: ModelStringInput
+  nombreInvitado11: ModelStringInput
+  nombreInvitado12: ModelStringInput
+  ofertaDeInvitaciones: ModelIntInput
+  nInvitacionesAceptadas: ModelIntInput
+  invitacionFamiliar: ModelBooleanInput
+  apellidosFamilia: ModelStringInput
   and: [ModelTodoConditionInput]
   or: [ModelTodoConditionInput]
   not: ModelTodoConditionInput
@@ -189,14 +234,44 @@ input ModelTodoConditionInput {
 
 input CreateTodoInput {
   id: ID
-  name: String!
-  description: String
+  IDnovios: String!
+  nombreInvitado1: String
+  nombreInvitado2: String
+  nombreInvitado3: String
+  nombreInvitado4: String
+  nombreInvitado5: String
+  nombreInvitado6: String
+  nombreInvitado7: String
+  nombreInvitado8: String
+  nombreInvitado9: String
+  nombreInvitado10: String
+  nombreInvitado11: String
+  nombreInvitado12: String
+  ofertaDeInvitaciones: Int
+  nInvitacionesAceptadas: Int
+  invitacionFamiliar: Boolean!
+  apellidosFamilia: String
 }
 
 input UpdateTodoInput {
   id: ID!
-  name: String
-  description: String
+  IDnovios: String
+  nombreInvitado1: String
+  nombreInvitado2: String
+  nombreInvitado3: String
+  nombreInvitado4: String
+  nombreInvitado5: String
+  nombreInvitado6: String
+  nombreInvitado7: String
+  nombreInvitado8: String
+  nombreInvitado9: String
+  nombreInvitado10: String
+  nombreInvitado11: String
+  nombreInvitado12: String
+  ofertaDeInvitaciones: Int
+  nInvitacionesAceptadas: Int
+  invitacionFamiliar: Boolean
+  apellidosFamilia: String
 }
 
 input DeleteTodoInput {
@@ -211,8 +286,23 @@ type Mutation {
 
 input ModelSubscriptionTodoFilterInput {
   id: ModelSubscriptionIDInput
-  name: ModelSubscriptionStringInput
-  description: ModelSubscriptionStringInput
+  IDnovios: ModelSubscriptionStringInput
+  nombreInvitado1: ModelSubscriptionStringInput
+  nombreInvitado2: ModelSubscriptionStringInput
+  nombreInvitado3: ModelSubscriptionStringInput
+  nombreInvitado4: ModelSubscriptionStringInput
+  nombreInvitado5: ModelSubscriptionStringInput
+  nombreInvitado6: ModelSubscriptionStringInput
+  nombreInvitado7: ModelSubscriptionStringInput
+  nombreInvitado8: ModelSubscriptionStringInput
+  nombreInvitado9: ModelSubscriptionStringInput
+  nombreInvitado10: ModelSubscriptionStringInput
+  nombreInvitado11: ModelSubscriptionStringInput
+  nombreInvitado12: ModelSubscriptionStringInput
+  ofertaDeInvitaciones: ModelSubscriptionIntInput
+  nInvitacionesAceptadas: ModelSubscriptionIntInput
+  invitacionFamiliar: ModelSubscriptionBooleanInput
+  apellidosFamilia: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
   and: [ModelSubscriptionTodoFilterInput]
