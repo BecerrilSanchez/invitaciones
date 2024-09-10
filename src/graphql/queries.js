@@ -5,8 +5,23 @@ export const getTodo = /* GraphQL */ `
   query GetTodo($id: ID!) {
     getTodo(id: $id) {
       id
-      name
-      description
+      IDnovios
+      nombreInvitado1
+      nombreInvitado2
+      nombreInvitado3
+      nombreInvitado4
+      nombreInvitado5
+      nombreInvitado6
+      nombreInvitado7
+      nombreInvitado8
+      nombreInvitado9
+      nombreInvitado10
+      nombreInvitado11
+      nombreInvitado12
+      ofertaDeInvitaciones
+      nInvitacionesAceptadas
+      invitacionFamiliar
+      apellidosFamilia
       createdAt
       updatedAt
       __typename
@@ -22,8 +37,23 @@ export const listTodos = /* GraphQL */ `
     listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
-        description
+        IDnovios
+        nombreInvitado1
+        nombreInvitado2
+        nombreInvitado3
+        nombreInvitado4
+        nombreInvitado5
+        nombreInvitado6
+        nombreInvitado7
+        nombreInvitado8
+        nombreInvitado9
+        nombreInvitado10
+        nombreInvitado11
+        nombreInvitado12
+        ofertaDeInvitaciones
+        nInvitacionesAceptadas
+        invitacionFamiliar
+        apellidosFamilia
         createdAt
         updatedAt
         __typename
