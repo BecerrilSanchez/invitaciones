@@ -3,23 +3,47 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type Todo @model {
+type User @model {
   id: ID!
-  IDnovios: String!
-  nombreInvitado1: String
-  nombreInvitado2: String
-  nombreInvitado3: String
-  nombreInvitado4: String
-  nombreInvitado5: String
-  nombreInvitado6: String
-  nombreInvitado7: String
-  nombreInvitado8: String
-  nombreInvitado9: String
-  nombreInvitado10: String
-  nombreInvitado11: String # Corregí aquí, ya que había un error tipográfico ("Strin" -> "String")
-  nombreInvitado12: String
-  ofertaDeInvitaciones: Int
-  nInvitacionesAceptadas: Int
+  nombreUsuario: String!
+  gmailUsuario: String
+  movilUsuario: String
+  formatoInvitacion: String
+  notaEnvio: String
+  fechaEnvio: AWSDate
+  horaEnvio: AWSTime
+  invitaciones: [Invitaciones] @hasMany
+}
+type Invitaciones @model {
+  invitacionID: ID!
+  numInvitacionesOfrecidas: Int!
+  numInvitacionesConfirmadas: Int
   invitacionFamiliar: Boolean!
-  apellidosFamilia: String
+  grupo: Grupo @hasOne
+  evento: [Evento] @hasMany
+}
+type Grupo @model {
+  GrupoID: ID!
+  nombreFamilia: String
+  invitados: [Invitados] @hasMany
+}
+type Invitados @model {
+  invitadoID: ID!
+  nombreInvitado: String
+  apellidoMaInv: String
+  apellidoPaInv: String
+  movilInvitado: String
+  emailInvitado: String
+}
+type Evento @model {
+  eventoID: ID!
+  nombreEvento: String
+  lugares: [Lugares] @hasMany
+}
+type Lugares @model {
+  lugarID: ID!
+  tipo: String
+  fecha: AWSDate
+  hora: AWSTime
+  urlUbicacion: String
 }

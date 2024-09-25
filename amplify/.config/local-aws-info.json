@@ -3,5 +3,15 @@
     "configLevel": "project",
     "useProfile": true,
     "profileName": "default"
+  },
+  "invita": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  },
+  "pro": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
   }
 }

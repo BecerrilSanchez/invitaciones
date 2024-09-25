@@ -27,30 +27,29 @@
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIIdOutput": "sgblcevzvnctpmpwtx7czo4msq",
-        "GraphQLAPIEndpointOutput": "https://q5i43wcygzglbbn2xnaihptp6m.appsync-api.us-west-2.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-dts52jtprzbqjn3kop6scwjqkq"
+        "GraphQLAPIIdOutput": "p3axhdquinhm5cxmjvoi4mdar4",
+        "GraphQLAPIEndpointOutput": "https://lm2sfvtfefd6te556rdhcsllr4.appsync-api.us-west-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-revox5adpbh3xoqurt7w5dhqbu"
       },
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-proyectoaws-dev-87a84-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiproyectoaws"
       },
-      "lastPushTimeStamp": "2024-09-10T22:39:22.387Z",
-      "lastPushDirHash": "UtNCYCIJbLR+1/QRed8RoYlpi+0="
+      "lastPushTimeStamp": "2024-09-21T02:33:11.773Z",
+      "lastPushDirHash": "k0r41YR2U7hMOmFUB8CDu7bA3Xc="
     }
   },
   "hosting": {
     "amplifyhosting": {
-      "service": "amplifyhosting",
       "providerPlugin": "awscloudformation",
+      "service": "amplifyhosting",
       "type": "manual",
+      "output": {},
+      "lastPushTimeStamp": "2024-09-21T02:33:09.243Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-proyectoaws-dev-87a84-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
-      },
-      "lastPushTimeStamp": "2024-09-10T22:39:20.348Z",
-      "output": {},
-      "lastPushDirHash": "/RaW9SVMoTzmziIXLbCSnhEpCgk="
+      }
     }
   }
 }

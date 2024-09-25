@@ -1,24 +1,73 @@
-type Todo {
+type User {
   id: ID!
-  IDnovios: String!
-  nombreInvitado1: String
-  nombreInvitado2: String
-  nombreInvitado3: String
-  nombreInvitado4: String
-  nombreInvitado5: String
-  nombreInvitado6: String
-  nombreInvitado7: String
-  nombreInvitado8: String
-  nombreInvitado9: String
-  nombreInvitado10: String
-  nombreInvitado11: String
-  nombreInvitado12: String
-  ofertaDeInvitaciones: Int
-  nInvitacionesAceptadas: Int
-  invitacionFamiliar: Boolean!
-  apellidosFamilia: String
+  nombreUsuario: String!
+  gmailUsuario: String
+  movilUsuario: String
+  formatoInvitacion: String
+  notaEnvio: String
+  fechaEnvio: AWSDate
+  horaEnvio: AWSTime
+  invitaciones(filter: ModelInvitacionesFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelInvitacionesConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+}
+
+type Invitaciones {
+  invitacionID: ID!
+  numInvitacionesOfrecidas: Int!
+  numInvitacionesConfirmadas: Int
+  invitacionFamiliar: Boolean!
+  grupo: Grupo
+  evento(filter: ModelEventoFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelEventoConnection
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  userInvitacionesId: ID
+  invitacionesGrupoId: ID
+}
+
+type Grupo {
+  GrupoID: ID!
+  nombreFamilia: String
+  invitados(filter: ModelInvitadosFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelInvitadosConnection
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Invitados {
+  invitadoID: ID!
+  nombreInvitado: String
+  apellidoMaInv: String
+  apellidoPaInv: String
+  movilInvitado: String
+  emailInvitado: String
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  grupoInvitadosId: ID
+}
+
+type Evento {
+  eventoID: ID!
+  nombreEvento: String
+  lugares(filter: ModelLugaresFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelLugaresConnection
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  invitacionesEventoId: ID
+}
+
+type Lugares {
+  lugarID: ID!
+  tipo: String
+  fecha: AWSDate
+  hora: AWSTime
+  urlUbicacion: String
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  eventoLugaresId: ID
 }
 
 input ModelStringInput {
@@ -171,146 +220,466 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelTodoConnection {
-  items: [Todo]!
+type ModelUserConnection {
+  items: [User]!
   nextToken: String
 }
 
-input ModelTodoFilterInput {
+input ModelUserFilterInput {
   id: ModelIDInput
-  IDnovios: ModelStringInput
-  nombreInvitado1: ModelStringInput
-  nombreInvitado2: ModelStringInput
-  nombreInvitado3: ModelStringInput
-  nombreInvitado4: ModelStringInput
-  nombreInvitado5: ModelStringInput
-  nombreInvitado6: ModelStringInput
-  nombreInvitado7: ModelStringInput
-  nombreInvitado8: ModelStringInput
-  nombreInvitado9: ModelStringInput
-  nombreInvitado10: ModelStringInput
-  nombreInvitado11: ModelStringInput
-  nombreInvitado12: ModelStringInput
-  ofertaDeInvitaciones: ModelIntInput
-  nInvitacionesAceptadas: ModelIntInput
-  invitacionFamiliar: ModelBooleanInput
-  apellidosFamilia: ModelStringInput
+  nombreUsuario: ModelStringInput
+  gmailUsuario: ModelStringInput
+  movilUsuario: ModelStringInput
+  formatoInvitacion: ModelStringInput
+  notaEnvio: ModelStringInput
+  fechaEnvio: ModelStringInput
+  horaEnvio: ModelStringInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
-  and: [ModelTodoFilterInput]
-  or: [ModelTodoFilterInput]
-  not: ModelTodoFilterInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
 }
 
 type Query {
-  getTodo(id: ID!): Todo
-  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getInvitaciones(id: ID!): Invitaciones
+  listInvitaciones(filter: ModelInvitacionesFilterInput, limit: Int, nextToken: String): ModelInvitacionesConnection
+  getGrupo(id: ID!): Grupo
+  listGrupos(filter: ModelGrupoFilterInput, limit: Int, nextToken: String): ModelGrupoConnection
+  getInvitados(id: ID!): Invitados
+  listInvitados(filter: ModelInvitadosFilterInput, limit: Int, nextToken: String): ModelInvitadosConnection
+  getEvento(id: ID!): Evento
+  listEventos(filter: ModelEventoFilterInput, limit: Int, nextToken: String): ModelEventoConnection
+  getLugares(id: ID!): Lugares
+  listLugares(filter: ModelLugaresFilterInput, limit: Int, nextToken: String): ModelLugaresConnection
 }
 
-input ModelTodoConditionInput {
-  IDnovios: ModelStringInput
-  nombreInvitado1: ModelStringInput
-  nombreInvitado2: ModelStringInput
-  nombreInvitado3: ModelStringInput
-  nombreInvitado4: ModelStringInput
-  nombreInvitado5: ModelStringInput
-  nombreInvitado6: ModelStringInput
-  nombreInvitado7: ModelStringInput
-  nombreInvitado8: ModelStringInput
-  nombreInvitado9: ModelStringInput
-  nombreInvitado10: ModelStringInput
-  nombreInvitado11: ModelStringInput
-  nombreInvitado12: ModelStringInput
-  ofertaDeInvitaciones: ModelIntInput
-  nInvitacionesAceptadas: ModelIntInput
-  invitacionFamiliar: ModelBooleanInput
-  apellidosFamilia: ModelStringInput
-  and: [ModelTodoConditionInput]
-  or: [ModelTodoConditionInput]
-  not: ModelTodoConditionInput
+input ModelUserConditionInput {
+  nombreUsuario: ModelStringInput
+  gmailUsuario: ModelStringInput
+  movilUsuario: ModelStringInput
+  formatoInvitacion: ModelStringInput
+  notaEnvio: ModelStringInput
+  fechaEnvio: ModelStringInput
+  horaEnvio: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
   createdAt: ModelStringInput
   updatedAt: ModelStringInput
 }
 
-input CreateTodoInput {
+input CreateUserInput {
   id: ID
-  IDnovios: String!
-  nombreInvitado1: String
-  nombreInvitado2: String
-  nombreInvitado3: String
-  nombreInvitado4: String
-  nombreInvitado5: String
-  nombreInvitado6: String
-  nombreInvitado7: String
-  nombreInvitado8: String
-  nombreInvitado9: String
-  nombreInvitado10: String
-  nombreInvitado11: String
-  nombreInvitado12: String
-  ofertaDeInvitaciones: Int
-  nInvitacionesAceptadas: Int
-  invitacionFamiliar: Boolean!
-  apellidosFamilia: String
+  nombreUsuario: String!
+  gmailUsuario: String
+  movilUsuario: String
+  formatoInvitacion: String
+  notaEnvio: String
+  fechaEnvio: AWSDate
+  horaEnvio: AWSTime
 }
 
-input UpdateTodoInput {
+input UpdateUserInput {
   id: ID!
-  IDnovios: String
-  nombreInvitado1: String
-  nombreInvitado2: String
-  nombreInvitado3: String
-  nombreInvitado4: String
-  nombreInvitado5: String
-  nombreInvitado6: String
-  nombreInvitado7: String
-  nombreInvitado8: String
-  nombreInvitado9: String
-  nombreInvitado10: String
-  nombreInvitado11: String
-  nombreInvitado12: String
-  ofertaDeInvitaciones: Int
-  nInvitacionesAceptadas: Int
-  invitacionFamiliar: Boolean
-  apellidosFamilia: String
+  nombreUsuario: String
+  gmailUsuario: String
+  movilUsuario: String
+  formatoInvitacion: String
+  notaEnvio: String
+  fechaEnvio: AWSDate
+  horaEnvio: AWSTime
 }
 
-input DeleteTodoInput {
+input DeleteUserInput {
   id: ID!
 }
 
 type Mutation {
-  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
-  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
-  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createInvitaciones(input: CreateInvitacionesInput!, condition: ModelInvitacionesConditionInput): Invitaciones
+  updateInvitaciones(input: UpdateInvitacionesInput!, condition: ModelInvitacionesConditionInput): Invitaciones
+  deleteInvitaciones(input: DeleteInvitacionesInput!, condition: ModelInvitacionesConditionInput): Invitaciones
+  createGrupo(input: CreateGrupoInput!, condition: ModelGrupoConditionInput): Grupo
+  updateGrupo(input: UpdateGrupoInput!, condition: ModelGrupoConditionInput): Grupo
+  deleteGrupo(input: DeleteGrupoInput!, condition: ModelGrupoConditionInput): Grupo
+  createInvitados(input: CreateInvitadosInput!, condition: ModelInvitadosConditionInput): Invitados
+  updateInvitados(input: UpdateInvitadosInput!, condition: ModelInvitadosConditionInput): Invitados
+  deleteInvitados(input: DeleteInvitadosInput!, condition: ModelInvitadosConditionInput): Invitados
+  createEvento(input: CreateEventoInput!, condition: ModelEventoConditionInput): Evento
+  updateEvento(input: UpdateEventoInput!, condition: ModelEventoConditionInput): Evento
+  deleteEvento(input: DeleteEventoInput!, condition: ModelEventoConditionInput): Evento
+  createLugares(input: CreateLugaresInput!, condition: ModelLugaresConditionInput): Lugares
+  updateLugares(input: UpdateLugaresInput!, condition: ModelLugaresConditionInput): Lugares
+  deleteLugares(input: DeleteLugaresInput!, condition: ModelLugaresConditionInput): Lugares
 }
 
-input ModelSubscriptionTodoFilterInput {
+input ModelSubscriptionUserFilterInput {
   id: ModelSubscriptionIDInput
-  IDnovios: ModelSubscriptionStringInput
-  nombreInvitado1: ModelSubscriptionStringInput
-  nombreInvitado2: ModelSubscriptionStringInput
-  nombreInvitado3: ModelSubscriptionStringInput
-  nombreInvitado4: ModelSubscriptionStringInput
-  nombreInvitado5: ModelSubscriptionStringInput
-  nombreInvitado6: ModelSubscriptionStringInput
-  nombreInvitado7: ModelSubscriptionStringInput
-  nombreInvitado8: ModelSubscriptionStringInput
-  nombreInvitado9: ModelSubscriptionStringInput
-  nombreInvitado10: ModelSubscriptionStringInput
-  nombreInvitado11: ModelSubscriptionStringInput
-  nombreInvitado12: ModelSubscriptionStringInput
-  ofertaDeInvitaciones: ModelSubscriptionIntInput
-  nInvitacionesAceptadas: ModelSubscriptionIntInput
-  invitacionFamiliar: ModelSubscriptionBooleanInput
-  apellidosFamilia: ModelSubscriptionStringInput
+  nombreUsuario: ModelSubscriptionStringInput
+  gmailUsuario: ModelSubscriptionStringInput
+  movilUsuario: ModelSubscriptionStringInput
+  formatoInvitacion: ModelSubscriptionStringInput
+  notaEnvio: ModelSubscriptionStringInput
+  fechaEnvio: ModelSubscriptionStringInput
+  horaEnvio: ModelSubscriptionStringInput
   createdAt: ModelSubscriptionStringInput
   updatedAt: ModelSubscriptionStringInput
-  and: [ModelSubscriptionTodoFilterInput]
-  or: [ModelSubscriptionTodoFilterInput]
+  and: [ModelSubscriptionUserFilterInput]
+  or: [ModelSubscriptionUserFilterInput]
+  userInvitacionesId: ModelSubscriptionIDInput
 }
 
 type Subscription {
-  onCreateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["createTodo"])
-  onUpdateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["updateTodo"])
-  onDeleteTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateInvitaciones(filter: ModelSubscriptionInvitacionesFilterInput): Invitaciones @aws_subscribe(mutations: ["createInvitaciones"])
+  onUpdateInvitaciones(filter: ModelSubscriptionInvitacionesFilterInput): Invitaciones @aws_subscribe(mutations: ["updateInvitaciones"])
+  onDeleteInvitaciones(filter: ModelSubscriptionInvitacionesFilterInput): Invitaciones @aws_subscribe(mutations: ["deleteInvitaciones"])
+  onCreateGrupo(filter: ModelSubscriptionGrupoFilterInput): Grupo @aws_subscribe(mutations: ["createGrupo"])
+  onUpdateGrupo(filter: ModelSubscriptionGrupoFilterInput): Grupo @aws_subscribe(mutations: ["updateGrupo"])
+  onDeleteGrupo(filter: ModelSubscriptionGrupoFilterInput): Grupo @aws_subscribe(mutations: ["deleteGrupo"])
+  onCreateInvitados(filter: ModelSubscriptionInvitadosFilterInput): Invitados @aws_subscribe(mutations: ["createInvitados"])
+  onUpdateInvitados(filter: ModelSubscriptionInvitadosFilterInput): Invitados @aws_subscribe(mutations: ["updateInvitados"])
+  onDeleteInvitados(filter: ModelSubscriptionInvitadosFilterInput): Invitados @aws_subscribe(mutations: ["deleteInvitados"])
+  onCreateEvento(filter: ModelSubscriptionEventoFilterInput): Evento @aws_subscribe(mutations: ["createEvento"])
+  onUpdateEvento(filter: ModelSubscriptionEventoFilterInput): Evento @aws_subscribe(mutations: ["updateEvento"])
+  onDeleteEvento(filter: ModelSubscriptionEventoFilterInput): Evento @aws_subscribe(mutations: ["deleteEvento"])
+  onCreateLugares(filter: ModelSubscriptionLugaresFilterInput): Lugares @aws_subscribe(mutations: ["createLugares"])
+  onUpdateLugares(filter: ModelSubscriptionLugaresFilterInput): Lugares @aws_subscribe(mutations: ["updateLugares"])
+  onDeleteLugares(filter: ModelSubscriptionLugaresFilterInput): Lugares @aws_subscribe(mutations: ["deleteLugares"])
+}
+
+type ModelInvitacionesConnection {
+  items: [Invitaciones]!
+  nextToken: String
+}
+
+input ModelInvitacionesFilterInput {
+  invitacionID: ModelIDInput
+  numInvitacionesOfrecidas: ModelIntInput
+  numInvitacionesConfirmadas: ModelIntInput
+  invitacionFamiliar: ModelBooleanInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelInvitacionesFilterInput]
+  or: [ModelInvitacionesFilterInput]
+  not: ModelInvitacionesFilterInput
+  userInvitacionesId: ModelIDInput
+  invitacionesGrupoId: ModelIDInput
+}
+
+input ModelInvitacionesConditionInput {
+  invitacionID: ModelIDInput
+  numInvitacionesOfrecidas: ModelIntInput
+  numInvitacionesConfirmadas: ModelIntInput
+  invitacionFamiliar: ModelBooleanInput
+  and: [ModelInvitacionesConditionInput]
+  or: [ModelInvitacionesConditionInput]
+  not: ModelInvitacionesConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  userInvitacionesId: ModelIDInput
+  invitacionesGrupoId: ModelIDInput
+}
+
+input CreateInvitacionesInput {
+  invitacionID: ID!
+  numInvitacionesOfrecidas: Int!
+  numInvitacionesConfirmadas: Int
+  invitacionFamiliar: Boolean!
+  id: ID
+  userInvitacionesId: ID
+  invitacionesGrupoId: ID
+}
+
+input UpdateInvitacionesInput {
+  invitacionID: ID
+  numInvitacionesOfrecidas: Int
+  numInvitacionesConfirmadas: Int
+  invitacionFamiliar: Boolean
+  id: ID!
+  userInvitacionesId: ID
+  invitacionesGrupoId: ID
+}
+
+input DeleteInvitacionesInput {
+  id: ID!
+}
+
+input ModelSubscriptionInvitacionesFilterInput {
+  invitacionID: ModelSubscriptionIDInput
+  numInvitacionesOfrecidas: ModelSubscriptionIntInput
+  numInvitacionesConfirmadas: ModelSubscriptionIntInput
+  invitacionFamiliar: ModelSubscriptionBooleanInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionInvitacionesFilterInput]
+  or: [ModelSubscriptionInvitacionesFilterInput]
+  invitacionesEventoId: ModelSubscriptionIDInput
+  invitacionesGrupoId: ModelSubscriptionIDInput
+}
+
+type ModelGrupoConnection {
+  items: [Grupo]!
+  nextToken: String
+}
+
+input ModelGrupoFilterInput {
+  GrupoID: ModelIDInput
+  nombreFamilia: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelGrupoFilterInput]
+  or: [ModelGrupoFilterInput]
+  not: ModelGrupoFilterInput
+}
+
+input ModelGrupoConditionInput {
+  GrupoID: ModelIDInput
+  nombreFamilia: ModelStringInput
+  and: [ModelGrupoConditionInput]
+  or: [ModelGrupoConditionInput]
+  not: ModelGrupoConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+}
+
+input CreateGrupoInput {
+  GrupoID: ID!
+  nombreFamilia: String
+  id: ID
+}
+
+input UpdateGrupoInput {
+  GrupoID: ID
+  nombreFamilia: String
+  id: ID!
+}
+
+input DeleteGrupoInput {
+  id: ID!
+}
+
+input ModelSubscriptionGrupoFilterInput {
+  GrupoID: ModelSubscriptionIDInput
+  nombreFamilia: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionGrupoFilterInput]
+  or: [ModelSubscriptionGrupoFilterInput]
+  grupoInvitadosId: ModelSubscriptionIDInput
+}
+
+type ModelInvitadosConnection {
+  items: [Invitados]!
+  nextToken: String
+}
+
+input ModelInvitadosFilterInput {
+  invitadoID: ModelIDInput
+  nombreInvitado: ModelStringInput
+  apellidoMaInv: ModelStringInput
+  apellidoPaInv: ModelStringInput
+  movilInvitado: ModelStringInput
+  emailInvitado: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelInvitadosFilterInput]
+  or: [ModelInvitadosFilterInput]
+  not: ModelInvitadosFilterInput
+  grupoInvitadosId: ModelIDInput
+}
+
+input ModelInvitadosConditionInput {
+  invitadoID: ModelIDInput
+  nombreInvitado: ModelStringInput
+  apellidoMaInv: ModelStringInput
+  apellidoPaInv: ModelStringInput
+  movilInvitado: ModelStringInput
+  emailInvitado: ModelStringInput
+  and: [ModelInvitadosConditionInput]
+  or: [ModelInvitadosConditionInput]
+  not: ModelInvitadosConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  grupoInvitadosId: ModelIDInput
+}
+
+input CreateInvitadosInput {
+  invitadoID: ID!
+  nombreInvitado: String
+  apellidoMaInv: String
+  apellidoPaInv: String
+  movilInvitado: String
+  emailInvitado: String
+  id: ID
+  grupoInvitadosId: ID
+}
+
+input UpdateInvitadosInput {
+  invitadoID: ID
+  nombreInvitado: String
+  apellidoMaInv: String
+  apellidoPaInv: String
+  movilInvitado: String
+  emailInvitado: String
+  id: ID!
+  grupoInvitadosId: ID
+}
+
+input DeleteInvitadosInput {
+  id: ID!
+}
+
+input ModelSubscriptionInvitadosFilterInput {
+  invitadoID: ModelSubscriptionIDInput
+  nombreInvitado: ModelSubscriptionStringInput
+  apellidoMaInv: ModelSubscriptionStringInput
+  apellidoPaInv: ModelSubscriptionStringInput
+  movilInvitado: ModelSubscriptionStringInput
+  emailInvitado: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionInvitadosFilterInput]
+  or: [ModelSubscriptionInvitadosFilterInput]
+}
+
+type ModelEventoConnection {
+  items: [Evento]!
+  nextToken: String
+}
+
+input ModelEventoFilterInput {
+  eventoID: ModelIDInput
+  nombreEvento: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelEventoFilterInput]
+  or: [ModelEventoFilterInput]
+  not: ModelEventoFilterInput
+  invitacionesEventoId: ModelIDInput
+}
+
+input ModelEventoConditionInput {
+  eventoID: ModelIDInput
+  nombreEvento: ModelStringInput
+  and: [ModelEventoConditionInput]
+  or: [ModelEventoConditionInput]
+  not: ModelEventoConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  invitacionesEventoId: ModelIDInput
+}
+
+input CreateEventoInput {
+  eventoID: ID!
+  nombreEvento: String
+  id: ID
+  invitacionesEventoId: ID
+}
+
+input UpdateEventoInput {
+  eventoID: ID
+  nombreEvento: String
+  id: ID!
+  invitacionesEventoId: ID
+}
+
+input DeleteEventoInput {
+  id: ID!
+}
+
+input ModelSubscriptionEventoFilterInput {
+  eventoID: ModelSubscriptionIDInput
+  nombreEvento: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionEventoFilterInput]
+  or: [ModelSubscriptionEventoFilterInput]
+  eventoLugaresId: ModelSubscriptionIDInput
+}
+
+type ModelLugaresConnection {
+  items: [Lugares]!
+  nextToken: String
+}
+
+input ModelLugaresFilterInput {
+  lugarID: ModelIDInput
+  tipo: ModelStringInput
+  fecha: ModelStringInput
+  hora: ModelStringInput
+  urlUbicacion: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelLugaresFilterInput]
+  or: [ModelLugaresFilterInput]
+  not: ModelLugaresFilterInput
+  eventoLugaresId: ModelIDInput
+}
+
+input ModelLugaresConditionInput {
+  lugarID: ModelIDInput
+  tipo: ModelStringInput
+  fecha: ModelStringInput
+  hora: ModelStringInput
+  urlUbicacion: ModelStringInput
+  and: [ModelLugaresConditionInput]
+  or: [ModelLugaresConditionInput]
+  not: ModelLugaresConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  eventoLugaresId: ModelIDInput
+}
+
+input CreateLugaresInput {
+  lugarID: ID!
+  tipo: String
+  fecha: AWSDate
+  hora: AWSTime
+  urlUbicacion: String
+  id: ID
+  eventoLugaresId: ID
+}
+
+input UpdateLugaresInput {
+  lugarID: ID
+  tipo: String
+  fecha: AWSDate
+  hora: AWSTime
+  urlUbicacion: String
+  id: ID!
+  eventoLugaresId: ID
+}
+
+input DeleteLugaresInput {
+  id: ID!
+}
+
+input ModelSubscriptionLugaresFilterInput {
+  lugarID: ModelSubscriptionIDInput
+  tipo: ModelSubscriptionStringInput
+  fecha: ModelSubscriptionStringInput
+  hora: ModelSubscriptionStringInput
+  urlUbicacion: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionLugaresFilterInput]
+  or: [ModelSubscriptionLugaresFilterInput]
 }

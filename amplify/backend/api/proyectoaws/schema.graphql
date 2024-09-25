@@ -12,21 +12,20 @@ type User @model {
   notaEnvio: String
   fechaEnvio: AWSDate
   horaEnvio: AWSTime
-  invitaciones: [Invitaciones] @connection(name: "UserInvitaciones") #1:M INVITACIONES
+  invitaciones: [Invitaciones] @hasMany
 }
 type Invitaciones @model {
   invitacionID: ID!
   numInvitacionesOfrecidas: Int!
   numInvitacionesConfirmadas: Int
   invitacionFamiliar: Boolean!
-  user: User @connection(name: "UserInvitaciones") #1:M INVITACIONES
-  grupo: Grupo @connection #1:1 GRUPO
-  evento: [Evento] @connection(name: "InvitacionesEvento") #1:M EVENTOS
+  grupo: Grupo @hasOne
+  evento: [Evento] @hasMany
 }
 type Grupo @model {
   GrupoID: ID!
   nombreFamilia: String
-  invitados: [Invitados] @connection(name: "GrupoInvitados") #1:M INVITADOS
+  invitados: [Invitados] @hasMany
 }
 type Invitados @model {
   invitadoID: ID!
@@ -35,13 +34,11 @@ type Invitados @model {
   apellidoPaInv: String
   movilInvitado: String
   emailInvitado: String
-  invitados: Grupo @connection(name: "GrupoInvitados") #1:M INVITADOS
 }
 type Evento @model {
   eventoID: ID!
   nombreEvento: String
-  invitacion: Invitaciones @connection(name: "InvitacionesEvento") #1:M EVENTOS
-  lugares: [Lugares] @connection(name: "EventoLugar") #1:M LUGARES
+  lugares: [Lugares] @hasMany
 }
 type Lugares @model {
   lugarID: ID!
@@ -49,5 +46,4 @@ type Lugares @model {
   fecha: AWSDate
   hora: AWSTime
   urlUbicacion: String
-  evento: Evento @connection(name: "EventoLugar") #1:M LUGARES
 }
