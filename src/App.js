@@ -4,6 +4,9 @@ import Boda from "./pages/Boda";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Amplify } from 'aws-amplify';
+import config from './amplifyconfiguration.json';
+Amplify.configure(config);
 
 // Define routes
 const router = createBrowserRouter([

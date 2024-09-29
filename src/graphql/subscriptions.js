@@ -4,7 +4,6 @@
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
     onCreateUser(filter: $filter) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -16,6 +15,7 @@ export const onCreateUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -25,7 +25,6 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
     onUpdateUser(filter: $filter) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -37,6 +36,7 @@ export const onUpdateUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -46,7 +46,6 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
     onDeleteUser(filter: $filter) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -58,6 +57,7 @@ export const onDeleteUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -69,12 +69,10 @@ export const onCreateInvitaciones = /* GraphQL */ `
     $filter: ModelSubscriptionInvitacionesFilterInput
   ) {
     onCreateInvitaciones(filter: $filter) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -99,12 +97,10 @@ export const onUpdateInvitaciones = /* GraphQL */ `
     $filter: ModelSubscriptionInvitacionesFilterInput
   ) {
     onUpdateInvitaciones(filter: $filter) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -129,12 +125,10 @@ export const onDeleteInvitaciones = /* GraphQL */ `
     $filter: ModelSubscriptionInvitacionesFilterInput
   ) {
     onDeleteInvitaciones(filter: $filter) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -157,7 +151,6 @@ export const onDeleteInvitaciones = /* GraphQL */ `
 export const onCreateGrupo = /* GraphQL */ `
   subscription OnCreateGrupo($filter: ModelSubscriptionGrupoFilterInput) {
     onCreateGrupo(filter: $filter) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -173,7 +166,6 @@ export const onCreateGrupo = /* GraphQL */ `
 export const onUpdateGrupo = /* GraphQL */ `
   subscription OnUpdateGrupo($filter: ModelSubscriptionGrupoFilterInput) {
     onUpdateGrupo(filter: $filter) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -189,7 +181,6 @@ export const onUpdateGrupo = /* GraphQL */ `
 export const onDeleteGrupo = /* GraphQL */ `
   subscription OnDeleteGrupo($filter: ModelSubscriptionGrupoFilterInput) {
     onDeleteGrupo(filter: $filter) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -207,7 +198,6 @@ export const onCreateInvitados = /* GraphQL */ `
     $filter: ModelSubscriptionInvitadosFilterInput
   ) {
     onCreateInvitados(filter: $filter) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -226,7 +216,6 @@ export const onUpdateInvitados = /* GraphQL */ `
     $filter: ModelSubscriptionInvitadosFilterInput
   ) {
     onUpdateInvitados(filter: $filter) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -245,7 +234,6 @@ export const onDeleteInvitados = /* GraphQL */ `
     $filter: ModelSubscriptionInvitadosFilterInput
   ) {
     onDeleteInvitados(filter: $filter) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -262,7 +250,6 @@ export const onDeleteInvitados = /* GraphQL */ `
 export const onCreateEvento = /* GraphQL */ `
   subscription OnCreateEvento($filter: ModelSubscriptionEventoFilterInput) {
     onCreateEvento(filter: $filter) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -279,7 +266,6 @@ export const onCreateEvento = /* GraphQL */ `
 export const onUpdateEvento = /* GraphQL */ `
   subscription OnUpdateEvento($filter: ModelSubscriptionEventoFilterInput) {
     onUpdateEvento(filter: $filter) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -296,7 +282,6 @@ export const onUpdateEvento = /* GraphQL */ `
 export const onDeleteEvento = /* GraphQL */ `
   subscription OnDeleteEvento($filter: ModelSubscriptionEventoFilterInput) {
     onDeleteEvento(filter: $filter) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -313,7 +298,6 @@ export const onDeleteEvento = /* GraphQL */ `
 export const onCreateLugares = /* GraphQL */ `
   subscription OnCreateLugares($filter: ModelSubscriptionLugaresFilterInput) {
     onCreateLugares(filter: $filter) {
-      lugarID
       tipo
       fecha
       hora
@@ -329,7 +313,6 @@ export const onCreateLugares = /* GraphQL */ `
 export const onUpdateLugares = /* GraphQL */ `
   subscription OnUpdateLugares($filter: ModelSubscriptionLugaresFilterInput) {
     onUpdateLugares(filter: $filter) {
-      lugarID
       tipo
       fecha
       hora
@@ -345,7 +328,6 @@ export const onUpdateLugares = /* GraphQL */ `
 export const onDeleteLugares = /* GraphQL */ `
   subscription OnDeleteLugares($filter: ModelSubscriptionLugaresFilterInput) {
     onDeleteLugares(filter: $filter) {
-      lugarID
       tipo
       fecha
       hora

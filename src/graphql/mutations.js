@@ -7,7 +7,6 @@ export const createUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     createUser(input: $input, condition: $condition) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -19,6 +18,7 @@ export const createUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -31,7 +31,6 @@ export const updateUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -43,6 +42,7 @@ export const updateUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -55,7 +55,6 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -67,6 +66,7 @@ export const deleteUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -79,12 +79,10 @@ export const createInvitaciones = /* GraphQL */ `
     $condition: ModelInvitacionesConditionInput
   ) {
     createInvitaciones(input: $input, condition: $condition) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -110,12 +108,10 @@ export const updateInvitaciones = /* GraphQL */ `
     $condition: ModelInvitacionesConditionInput
   ) {
     updateInvitaciones(input: $input, condition: $condition) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -141,12 +137,10 @@ export const deleteInvitaciones = /* GraphQL */ `
     $condition: ModelInvitacionesConditionInput
   ) {
     deleteInvitaciones(input: $input, condition: $condition) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -172,7 +166,6 @@ export const createGrupo = /* GraphQL */ `
     $condition: ModelGrupoConditionInput
   ) {
     createGrupo(input: $input, condition: $condition) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -191,7 +184,6 @@ export const updateGrupo = /* GraphQL */ `
     $condition: ModelGrupoConditionInput
   ) {
     updateGrupo(input: $input, condition: $condition) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -210,7 +202,6 @@ export const deleteGrupo = /* GraphQL */ `
     $condition: ModelGrupoConditionInput
   ) {
     deleteGrupo(input: $input, condition: $condition) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -229,7 +220,6 @@ export const createInvitados = /* GraphQL */ `
     $condition: ModelInvitadosConditionInput
   ) {
     createInvitados(input: $input, condition: $condition) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -249,7 +239,6 @@ export const updateInvitados = /* GraphQL */ `
     $condition: ModelInvitadosConditionInput
   ) {
     updateInvitados(input: $input, condition: $condition) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -269,7 +258,6 @@ export const deleteInvitados = /* GraphQL */ `
     $condition: ModelInvitadosConditionInput
   ) {
     deleteInvitados(input: $input, condition: $condition) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -289,7 +277,6 @@ export const createEvento = /* GraphQL */ `
     $condition: ModelEventoConditionInput
   ) {
     createEvento(input: $input, condition: $condition) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -309,7 +296,6 @@ export const updateEvento = /* GraphQL */ `
     $condition: ModelEventoConditionInput
   ) {
     updateEvento(input: $input, condition: $condition) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -329,7 +315,6 @@ export const deleteEvento = /* GraphQL */ `
     $condition: ModelEventoConditionInput
   ) {
     deleteEvento(input: $input, condition: $condition) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -349,7 +334,6 @@ export const createLugares = /* GraphQL */ `
     $condition: ModelLugaresConditionInput
   ) {
     createLugares(input: $input, condition: $condition) {
-      lugarID
       tipo
       fecha
       hora
@@ -368,7 +352,6 @@ export const updateLugares = /* GraphQL */ `
     $condition: ModelLugaresConditionInput
   ) {
     updateLugares(input: $input, condition: $condition) {
-      lugarID
       tipo
       fecha
       hora
@@ -387,7 +370,6 @@ export const deleteLugares = /* GraphQL */ `
     $condition: ModelLugaresConditionInput
   ) {
     deleteLugares(input: $input, condition: $condition) {
-      lugarID
       tipo
       fecha
       hora

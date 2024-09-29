@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-invitaciones-dev-9abd2-authRole",
+      "UnauthRoleArn": "arn:aws:iam::296062551551:role/amplify-invitaciones-dev-9abd2-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::296062551551:role/amplify-invitaciones-dev-9abd2-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-invitaciones-dev-9abd2-deployment",
+      "UnauthRoleName": "amplify-invitaciones-dev-9abd2-unauthRole",
+      "StackName": "amplify-invitaciones-dev-9abd2",
+      "StackId": "arn:aws:cloudformation:us-west-2:296062551551:stack/amplify-invitaciones-dev-9abd2/1eb4ce70-7e1a-11ef-842e-0accd21690d9",
+      "AmplifyAppId": "d12ebhhw7zrklp"
+    },
+    "categories": {
+      "api": {
+        "invitaciones": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d12ebhhw7zrklp",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "invitaciones5bce155d": {}
+      }
+    }
+  }
+}

@@ -4,7 +4,6 @@
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
-      id
       nombreUsuario
       gmailUsuario
       movilUsuario
@@ -16,6 +15,7 @@ export const getUser = /* GraphQL */ `
         nextToken
         __typename
       }
+      id
       createdAt
       updatedAt
       __typename
@@ -30,7 +30,6 @@ export const listUsers = /* GraphQL */ `
   ) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        id
         nombreUsuario
         gmailUsuario
         movilUsuario
@@ -38,6 +37,7 @@ export const listUsers = /* GraphQL */ `
         notaEnvio
         fechaEnvio
         horaEnvio
+        id
         createdAt
         updatedAt
         __typename
@@ -50,12 +50,10 @@ export const listUsers = /* GraphQL */ `
 export const getInvitaciones = /* GraphQL */ `
   query GetInvitaciones($id: ID!) {
     getInvitaciones(id: $id) {
-      invitacionID
       numInvitacionesOfrecidas
       numInvitacionesConfirmadas
       invitacionFamiliar
       grupo {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -83,7 +81,6 @@ export const listInvitaciones = /* GraphQL */ `
   ) {
     listInvitaciones(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        invitacionID
         numInvitacionesOfrecidas
         numInvitacionesConfirmadas
         invitacionFamiliar
@@ -102,7 +99,6 @@ export const listInvitaciones = /* GraphQL */ `
 export const getGrupo = /* GraphQL */ `
   query GetGrupo($id: ID!) {
     getGrupo(id: $id) {
-      GrupoID
       nombreFamilia
       invitados {
         nextToken
@@ -123,7 +119,6 @@ export const listGrupos = /* GraphQL */ `
   ) {
     listGrupos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        GrupoID
         nombreFamilia
         id
         createdAt
@@ -138,7 +133,6 @@ export const listGrupos = /* GraphQL */ `
 export const getInvitados = /* GraphQL */ `
   query GetInvitados($id: ID!) {
     getInvitados(id: $id) {
-      invitadoID
       nombreInvitado
       apellidoMaInv
       apellidoPaInv
@@ -160,7 +154,6 @@ export const listInvitados = /* GraphQL */ `
   ) {
     listInvitados(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        invitadoID
         nombreInvitado
         apellidoMaInv
         apellidoPaInv
@@ -180,7 +173,6 @@ export const listInvitados = /* GraphQL */ `
 export const getEvento = /* GraphQL */ `
   query GetEvento($id: ID!) {
     getEvento(id: $id) {
-      eventoID
       nombreEvento
       lugares {
         nextToken
@@ -202,7 +194,6 @@ export const listEventos = /* GraphQL */ `
   ) {
     listEventos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        eventoID
         nombreEvento
         id
         createdAt
@@ -218,7 +209,6 @@ export const listEventos = /* GraphQL */ `
 export const getLugares = /* GraphQL */ `
   query GetLugares($id: ID!) {
     getLugares(id: $id) {
-      lugarID
       tipo
       fecha
       hora
@@ -239,7 +229,6 @@ export const listLugares = /* GraphQL */ `
   ) {
     listLugares(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        lugarID
         tipo
         fecha
         hora

@@ -1,0 +1,41 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type User @model {
+  nombreUsuario: String!
+  gmailUsuario: String
+  movilUsuario: String
+  formatoInvitacion: String
+  notaEnvio: String
+  fechaEnvio: AWSDate
+  horaEnvio: AWSTime
+  invitaciones: [Invitaciones] @hasMany
+}
+type Invitaciones @model {
+  numInvitacionesOfrecidas: Int!
+  numInvitacionesConfirmadas: Int
+  invitacionFamiliar: Boolean!
+  grupo: Grupo @hasOne
+  evento: [Evento] @hasMany
+}
+type Grupo @model {
+  nombreFamilia: String
+  invitados: [Invitados] @hasMany
+}
+type Invitados @model {
+  nombreInvitado: String
+  apellidoMaInv: String
+  apellidoPaInv: String
+  movilInvitado: String
+  emailInvitado: String
+}
+type Evento @model {
+  nombreEvento: String
+  lugares: [Lugares] @hasMany
+}
+type Lugares @model {
+  tipo: String
+  fecha: AWSDate
+  hora: AWSTime
+  urlUbicacion: String
+}
