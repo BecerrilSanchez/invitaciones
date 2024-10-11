@@ -1,10 +1,12 @@
-// Se enlistan todos los usuarios existentes
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button, Form } from 'react-bootstrap';
+import "./components.css";
 
-const UserForm = () => {
+const UserForm = ({ email }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({ nombreUsuario: '', movilUsuario: '' });
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -29,7 +31,8 @@ const UserForm = () => {
         });
 
         const result = await response.json();
-        setUsers(result.data.listUsers.items);
+        const filteredUsers = result.data.listUsers.items.filter(user => user.gmailUsuario === email);
+        setUsers(filteredUsers);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -38,33 +41,108 @@ const UserForm = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [email]);
+
+  const handleEditClick = (user) => {
+    setFormData({
+      nombreUsuario: user.nombreUsuario,
+      movilUsuario: user.movilUsuario,
+    });
+    setIsEditing(true);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleAcceptClick = () => {
+    // Actualizar los datos con la nueva información ingresada
+    const updatedUsers = users.map(user => ({
+      ...user,
+      nombreUsuario: formData.nombreUsuario,
+      movilUsuario: formData.movilUsuario,
+    }));
+    setUsers(updatedUsers);
+    setIsEditing(false);
+  };
 
   if (loading) {
     return <div>Cargando usuarios...</div>;
   }
 
   return (
-    <div className="container">
-      <h2>Lista de Usuarios</h2>
+    <div className="container mt-32">
+      <h2>Información de usuario</h2>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Nombre</th>
             <th>Email</th>
             <th>Móvil</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <td>{user.nombreUsuario}</td>
-              <td>{user.gmailUsuario}</td>
-              <td>{user.movilUsuario}</td>
+          {users.length > 0 ? (
+            users.map((user, index) => (
+              <tr key={index}>
+                <td>{user.nombreUsuario}</td>
+                <td>{user.gmailUsuario}</td>
+                <td>{user.movilUsuario}</td>
+                <td>
+                  <Button onClick={() => handleEditClick(user)}>Editar</Button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No se encontró ningún usuario con ese correo.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </Table>
+
+      {/* Mostrar el formulario de edición si isEditing es verdadero */}
+      {isEditing && (
+        <div className="edit-form">
+          <h3>Editar Usuario</h3>
+          <Form>
+            <Form.Group controlId="formNombre">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                name="nombreUsuario"
+                value={formData.nombreUsuario}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formMovil">
+              <Form.Label>Móvil</Form.Label>
+              <Form.Control
+                type="text"
+                name="movilUsuario"
+                value={formData.movilUsuario}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email (No editable)</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                disabled
+              />
+            </Form.Group>
+            <Button variant="primary" onClick={handleAcceptClick}>
+              Aceptar
+            </Button>
+          </Form>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,19 +1,34 @@
-import React from "react";
+// src/Boda.js
+import React, { useContext, useEffect } from "react";
 import { Container, Accordion } from "react-bootstrap";
 import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import config from "../amplifyconfiguration.json";
+import { UserContext } from "../context/UserContext"; // Importa el contexto de usuario
 Amplify.configure(config);
 
 function Boda({ signOut, user }) {
-  console.log(user);
+  const { setUser } = useContext(UserContext); // Usa el contexto para almacenar la información del usuario
+
+  useEffect(() => {
+    if (user) {
+      setUser(user); // Guarda la información en el contexto
+      sessionStorage.setItem("user", JSON.stringify(user)); // Guarda el usuario en sessionStorage
+      console.log(
+        "Usuario guardado en contexto y sessionStorage desde /boda:",
+        user
+      );
+    } else {
+      console.log("Usuario no disponible en /boda");
+    }
+  }, [user, setUser]);
+
   return (
     <>
       <h1>Hello {user.username}</h1>
       <h1>Tu gmail es: {user.signInDetails.loginId}</h1>
       <button onClick={signOut}>Sign out</button>
-      return (
       <Container className="mt-5">
         <h1 className="mb-4">Nuestros Servicios</h1>
         <Accordion defaultActiveKey="0">
@@ -49,7 +64,6 @@ function Boda({ signOut, user }) {
           </Accordion.Item>
         </Accordion>
       </Container>
-      );
     </>
   );
 }

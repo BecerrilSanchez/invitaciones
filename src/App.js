@@ -1,3 +1,5 @@
+// src/App.js
+import React, { useEffect, useContext } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import Boda from "./pages/Boda";
@@ -6,12 +8,12 @@ import UserForm from "./pages/UserForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, Container, Dropdown } from "react-bootstrap";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Gear } from "react-bootstrap-icons"; // Usamos un ícono de react-bootstrap-icons
+import { Gear } from "react-bootstrap-icons";
 import { Amplify } from "aws-amplify";
+import { UserContext } from "./context/UserContext"; // Importa el contexto de usuario
 import config from "./amplifyconfiguration.json";
 Amplify.configure(config);
 
-// Define routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,13 +34,27 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const { user, setUser } = useContext(UserContext); // Accede a la información del usuario
+
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    if (!user && storedUser) {
+      setUser(JSON.parse(storedUser)); // Restaura el usuario desde sessionStorage si no está en el contexto
+    }
+
+    if (user) {
+      console.log("Usuario en App.js:", user); // Imprime la información del usuario
+    } else {
+      console.log("No hay usuario disponible en el contexto.");
+    }
+  }, [user, setUser]);
+
   const handleLogout = () => {
     console.log("Cerrar sesión");
-    // Aquí agregarás la lógica para cerrar sesión
   };
+
   return (
     <>
-      {/* Navbar */}
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand href="/">Mi Sitio Web</Navbar.Brand>
@@ -49,7 +65,6 @@ function App() {
               <Nav.Link href="/boda">Servicios</Nav.Link>
             </Nav>
 
-            {/* Icono de configuración */}
             <Dropdown align="end">
               <Dropdown.Toggle
                 as="a"
