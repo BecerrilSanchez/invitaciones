@@ -14,7 +14,7 @@ const UserForm = ({ email }) => {
         const response = await fetch('https://gyela7sxvfg7hofofnpumj74ti.appsync-api.us-west-2.amazonaws.com/graphql', {
           method: 'POST',
           headers: {
-            'x-api-key': 'da2-ejxzdwbrvbf5zfpesay42juw6q',
+            'x-api-key': 'da2-pj4s5ve4afeprph43nrpr5mp6a',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
