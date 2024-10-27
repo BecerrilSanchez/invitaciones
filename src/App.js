@@ -6,41 +6,15 @@ import Invitaciones from "./pages/Invitaciones";
 import PruebaAuth from "./pages/PruebaAuth";
 import Form from "./pages/Formulario";
 import UserForm from "./pages/UserForm";
+import Vista from "./pages/Vista";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Nav, Container, Dropdown } from "react-bootstrap";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Gear } from "react-bootstrap-icons";
 import { Amplify } from "aws-amplify";
 import { UserContext } from "./context/UserContext"; // Importa el contexto de usuario
 import config from "./amplifyconfiguration.json";
 Amplify.configure(config);
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/form",
-    element: <Form />,
-  },
-  {
-    path: "/userInfo",
-    element: <UserForm />,
-  },
-  {
-    path: "/general",
-    element: <General />,
-  },
-  {
-    path: "/misinvitaciones",
-    element: <Invitaciones />,
-  },
-  {
-    path: "/prueba",
-    element: <PruebaAuth />,
-  },
-]);
 
 function App() {
   const { user, setUser } = useContext(UserContext); // Accede a la información del usuario
@@ -105,7 +79,17 @@ function App() {
       </Navbar>
 
       {/* Router */}
-      <RouterProvider router={router} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/userInfo" element={<UserForm />} />
+          <Route path="/general" element={<General />} />
+          <Route path="/misinvitaciones" element={<Invitaciones />} />
+          <Route path="/prueba" element={<PruebaAuth />} />
+          <Route path="/grupo/:groupId" element={<Vista />} />
+        </Routes>
+      </Router>
     </>
   );
 }

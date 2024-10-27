@@ -1,90 +1,96 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useApiKey } from '../context/ApiKeyContext';
 import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
-const AppPrueba = ({ signOut, user }) => {
+const AppPrueba = ({ userId }) => {
   const apiKey = useApiKey();
   const { setUser } = useContext(UserContext);
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-  //Maneja la información del usuario logeado
-  useEffect(() => { 
-    const storeUserData = async () => {
-      if (!user || !user.signInDetails?.loginId) {
-        console.error("Información del usuario no disponible o incompleta.");
-        return;
-      }
-
-      setUser(user); // Almacena el usuario en el contexto
-      sessionStorage.setItem("user", JSON.stringify(user));
-      console.log("Usuario guardado en el contexto y sessionStorage desde AppPrueba:", user);
-
-      // Realiza la consulta a la API
-      try {
-        const fetchedUserData = await fetchUserData(user.signInDetails.loginId);
-        if (fetchedUserData) {
-          setUserData(fetchedUserData);
-          setUser((prevUser) => ({
-            ...prevUser,
-            apiId: fetchedUserData.id,
-          }));
-          sessionStorage.setItem("apiId", fetchedUserData.id);
-          console.log("Datos del usuario logeado obtenidos y almacenados.");
+  // Función para obtener los datos del usuario desde la API
+  const fetchUserData = async () => {
+    const query = `
+      query TraeInvitaciones {
+        getUser(id: "${userId}") {
+          gmailUsuario
+          id
+          invitaciones {
+            items {
+              id
+              invitacionFamiliar
+              grupo {
+                id
+                nombreFamilia
+              }
+            }
+          }
+          nombreUsuario
         }
-      } catch (error) {
-        console.error("Error al realizar la consulta de usuarios:", error);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    `;
 
-    storeUserData();
-  }, [user, setUser]);
-
-  //Trae la información del usuario que haga match con el correo logeado
-  const fetchUserData = async (loginId) => {
     try {
-      const response = await fetch(
-        "https://gyela7sxvfg7hofofnpumj74ti.appsync-api.us-west-2.amazonaws.com/graphql",
-        {
-          method: "POST",
-          headers: {
-            "x-api-key": apiKey,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query: `query { listUsers { items { gmailUsuario nombreUsuario movilUsuario id } } }`,
-          }),
-        }
-      );
-
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
+      const response = await fetch('https://gyela7sxvfg7hofofnpumj74ti.appsync-api.us-west-2.amazonaws.com/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+        },
+        body: JSON.stringify({ query }),
+      });
       const result = await response.json();
-      if (result.errors) throw new Error(`Errores en la respuesta de GraphQL: ${result.errors}`);
-
-      const users = result.data.listUsers.items;
-      return users.find((u) => u.gmailUsuario === loginId);
+      setUserData(result.data.getUser);
+      setIsLoading(false);
     } catch (error) {
-      console.error("Error en fetchUserData:", error);
-      return null;
+      console.error("Error al obtener los datos del usuario:", error);
+      setIsLoading(false);
     }
   };
 
-  if (isLoading) {
-    return <p>Cargandooooo datos del usuario...</p>;
-  }
-  console.log("----->"+JSON.stringify(userData));
+  useEffect(() => {
+    if (!userData) {
+      fetchUserData();
+    }
+  }, [userData]);
+
+  // Función para redirigir a la vista del grupo
+  const handleRedirect = (groupId) => {
+    navigate(`/grupo/${groupId}`);
+  };
+
   return (
     <div>
-      <p>La API Key es: {apiKey}</p>
-      <p>Usuario: {user.username}</p>
-      <p>Email: {user.signInDetails?.loginId}</p>
-      <p>Nombre desde API: {userData?.nombreUsuario}</p>
-      <p>Móvil desde API: {userData?.movilUsuario}</p>
-      <p>Id desde API: {userData?.id}</p>
-      <button onClick={signOut}>Cerrar sesión</button>
+      <h1>Bienvenido, {userData?.nombreUsuario}</h1>
+      <p>Email: {userData?.gmailUsuario}</p>
+      {isLoading ? (
+        <p>Cargando datos de invitaciones...</p>
+      ) : (
+        userData && userData.invitaciones && (
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre Familia</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userData.invitaciones.items.map((invitacion) => (
+                <tr key={invitacion.grupo.id}>
+                  <td>{invitacion.grupo.nombreFamilia}</td>
+                  <td>
+                    <button onClick={() => handleRedirect(invitacion.grupo.id)}>
+                      Ver Detalles
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+      )}
     </div>
   );
 };
