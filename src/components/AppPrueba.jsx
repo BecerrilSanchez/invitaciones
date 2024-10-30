@@ -98,7 +98,7 @@ const AppPrueba = ({ userId }) => {
                       <button onClick={() => handleRedirect(invitacion.grupo.id)}>
                         Ver Detalles
                       </button>
-                      <DeleteInvitacion groupId={invitacion.grupo.id} userId={userId} onDelete={() => handleDelete(invitacion.grupo.id)} />
+                      <DeleteInvitacion groupId={invitacion.grupo.id} invitacionId={invitacion.id} onDelete={() => handleDelete(invitacion.grupo.id)} />
                     </td>
                   </tr>
                 )
